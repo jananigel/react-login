@@ -1,6 +1,6 @@
 import { useCallback } from "react";
-import TextButton from "../../widgets/text-button/text-button.widget";
-import TextInput from "../../widgets/text-input.widget";
+import TextButton from "../../../widgets/text-button/text-button.widget";
+import TextInput from "../../../widgets/text-input/text-input.widget";
 
 const SignUpForm = ({ signInClick, submitClick, account, password, confirmPassword, onSignUpAccountChanged, onSignUpPasswordChanged, onSignUpConfirmPasswordChanged }) => {
 

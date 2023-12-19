@@ -1,7 +1,8 @@
 import { useCallback, useState } from "react";
-import SignInForm from "./sign-in-form.component";
-import SignUpForm from "./sign-up-form.component";
-import { useLoginFormContext } from "../../contexts/login-form.context";
+import SignInForm from "../sign-in-form/sign-in-form.component";
+import SignUpForm from "../sign-up-form/sign-up-form.component";
+import { useLoginFormContext } from "../../../contexts/login-form.context";
+import styles from './login-card.module.scss';
 
 const LoginCard = () => {
   const [isSignIn, setIsSignIn] = useState(true);
