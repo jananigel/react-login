@@ -11,7 +11,8 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  transition: transform .3s linear;
+  transition: transform .1s linear;
+  pointer-events: none;
 }
 
 .input {

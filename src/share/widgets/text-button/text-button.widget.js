@@ -3,8 +3,8 @@ import './text-button.module.scss';
 
 const TextButton = ({ text, btnClick }) => {
   const onBtnClick = useCallback(() => {
-    btnClick();
-  }, [btnClick]);
+    btnClick && btnClick();
+  }, [btnClick ?? null]);
   return (
     <button onClick={() => onBtnClick()}>{ text }</button>
   );
