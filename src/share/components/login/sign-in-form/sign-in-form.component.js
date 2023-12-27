@@ -82,7 +82,7 @@ const SignInForm = ({ signUpClick, account, password, onSignInAccountChanged, on
         {(errors?.password && errors.password.type === 'maxLength') && <span>{errors.password.message}</span>}
         {(errors?.password && errors.password.type === 'pattern') && <span>{errors.password.message}</span>}
         <TextButton text={'Sign In'}></TextButton>
-        <TextButton text={'Sign Up'} btnClick={() => onSignUpClick()}></TextButton>
+        <TextButton type={'secondary'} text={'Sign Up'} btnClick={() => onSignUpClick()}></TextButton>
       </form>
     </>
   )

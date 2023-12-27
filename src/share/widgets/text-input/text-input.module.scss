@@ -33,7 +33,8 @@
   border: 0;
   outline: none;
   padding: 6px 0 0;
-  font-size: calc(0.75em + 1vmin);
+  font-size: calc(0.75em + .65vmin);
+  background-color: transparent;
 
   &:focus ~ .title {
     transform: translateY(-160%);

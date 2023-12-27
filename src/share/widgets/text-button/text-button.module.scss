@@ -1,8 +1,14 @@
 button {
-  background-color: #fff;
+  background-color: var(--primary-btn-bg);
   border-radius: 16px;
-  border: 1px solid var(--primary-btn-color);
+  border: 1px solid var(--primary-btn-bg);
   padding: 8px 12px;
-  color: var(--primary-btn-color);
+  color: var(--primary-btn-font-color);
   cursor: pointer;
+
+  &.secondary {
+    border-color: transparent;
+    color: var(--secondary-btn-font-color);
+    background-color: var(--secondary-btn-bg);
+  }
 }

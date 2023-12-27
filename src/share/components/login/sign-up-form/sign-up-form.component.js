@@ -95,7 +95,7 @@ const SignUpForm = ({ signInClick, submitClick, account, password, confirmPasswo
           }}>
         </TextInput>
         <TextButton text={'Submit'}></TextButton>
-        <TextButton text={'Sign In'} btnClick={() => onSignInClick()}></TextButton>
+        <TextButton type={'secondary'} text={'Sign In'} btnClick={() => onSignInClick()}></TextButton>
       </form>
     </>
   )

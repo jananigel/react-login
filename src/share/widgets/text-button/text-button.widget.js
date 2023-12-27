@@ -1,12 +1,12 @@
 import { useCallback } from "react";
-import './text-button.module.scss';
+import styles from './text-button.module.scss';
 
-const TextButton = ({ text, btnClick }) => {
+const TextButton = ({ text, type, btnClick }) => {
   const onBtnClick = useCallback(() => {
     btnClick && btnClick();
   }, [btnClick ?? null]);
   return (
-    <button onClick={() => onBtnClick()}>{ text }</button>
+    <button className={type === 'secondary' ? styles.secondary : '' } onClick={() => onBtnClick()}>{ text }</button>
   );
 }
 

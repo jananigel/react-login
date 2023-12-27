@@ -1,8 +1,14 @@
 :root {
-  --primary-btn-color: #00a8fb;
+  --primary-color: #00a8fb;
+  --primary-font-color: #595959;
+
+  --primary-btn-bg: #00a8fb;
+  --secondary-btn-bg: transparent;
+  --primary-btn-font-color: #fff;
+  --secondary-btn-font-color: #00a8fb;
 
   --input-placeholder-color: #c3c3c3;
-  --input-border-color: #282828;
+  --input-border-color: #cfcfcf;
 
   --danger: rgb(255, 43, 43);
   --success: rgb(61, 196, 61);

@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import SignInForm from "../sign-in-form/sign-in-form.component";
 import SignUpForm from "../sign-up-form/sign-up-form.component";
 import { useLoginFormContext } from "../../../contexts/login-form.context";
-// import styles from './login-card.module.scss';
+import styles from './login-card.module.scss';
 
 const LoginCard = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -41,8 +41,8 @@ const LoginCard = () => {
 
   return (
     <>
-      <div className="login-card">
-        <div className="login-label">Login</div>
+      <div className={styles.card}>
+        <div className={styles.label}>Login</div>
         { form() }
       </div>
     </>
