@@ -1,10 +1,18 @@
 .field {
   display: flex;
-  border: 1px solid;
+  border: 1px solid var(--input-border-color);
   flex-direction: column-reverse;
   padding: 12px 16px;
   border-radius: 10px;
   position: relative;
+
+  &.invalid {
+    border-color: var(--danger);
+
+    > .title {
+      color: var(--danger);
+    }
+  }
 }
 
 .title {
@@ -13,6 +21,12 @@
   transform: translateY(-50%);
   transition: transform .1s linear;
   pointer-events: none;
+  color: var(--input-placeholder-color);
+
+  &.active {
+    transform: translateY(-160%);
+    font-size: calc(0.25em + 1vmin);
+  }
 }
 
 .input {

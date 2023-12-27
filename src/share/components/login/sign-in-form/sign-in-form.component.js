@@ -5,7 +5,8 @@ import { useForm } from 'react-hook-form';
 
 const SignInForm = ({ signUpClick, account, password, onSignInAccountChanged, onSignInPasswordChanged }) => {
 
-  const { register, handleSubmit, formState: { errors }, trigger, setValue } = useForm({mode: 'all'});
+  const { register, handleSubmit, formState, trigger, setValue,  } = useForm({mode: 'all'});
+  const { isDirty, touchedFields, errors } = formState;
 
   const onSignIn = useCallback((data) => {
     console.log('err = ', errors, ' register = ', data);
@@ -34,6 +35,7 @@ const SignInForm = ({ signUpClick, account, password, onSignInAccountChanged, on
     <>
       <form onSubmit={handleSubmit(onSignIn, onSignInError)}>
         <TextInput
+          isInvalid={ errors?.account && touchedFields?.account && !isDirty?.account }
           placeholder={'Account'}
           value={account}
           register={
@@ -47,6 +49,7 @@ const SignInForm = ({ signUpClick, account, password, onSignInAccountChanged, on
         </TextInput>
         {(errors?.account) && <span>{errors?.account.message}</span>}
         <TextInput
+          isInvalid={ errors?.account && touchedFields?.password && !isDirty?.password }
           placeholder={'Password'}
           value={password}
           type={'password'}
