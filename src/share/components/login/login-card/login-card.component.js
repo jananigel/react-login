@@ -42,7 +42,7 @@ const LoginCard = () => {
   return (
     <>
       <div className={styles.card}>
-        <div className={styles.label}>Login</div>
+        <div className={styles.label}>{isSignIn ? 'Login' : 'Registration'}</div>
         { form() }
       </div>
     </>
