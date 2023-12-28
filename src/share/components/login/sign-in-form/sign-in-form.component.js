@@ -2,6 +2,7 @@ import { useCallback } from "react";
 import TextButton from "../../../widgets/text-button/text-button.widget";
 import TextInput from "../../../widgets/text-input/text-input.widget";
 import { useForm } from 'react-hook-form';
+import styles from './sign-in-form.module.scss';
 
 const SignInForm = ({ signUpClick, account, password, onSignInAccountChanged, onSignInPasswordChanged }) => {
 
@@ -35,6 +36,7 @@ const SignInForm = ({ signUpClick, account, password, onSignInAccountChanged, on
     <>
       <form onSubmit={handleSubmit(onSignIn, onSignInError)}>
         <TextInput
+          className={styles.test}
           isInvalid={ errors?.account && touchedFields?.account && !isDirty?.account }
           placeholder={'Account'}
           value={account}
@@ -49,7 +51,7 @@ const SignInForm = ({ signUpClick, account, password, onSignInAccountChanged, on
         </TextInput>
         {(errors?.account) && <span>{errors?.account.message}</span>}
         <TextInput
-          isInvalid={ errors?.account && touchedFields?.password && !isDirty?.password }
+          isInvalid={ errors?.password && touchedFields?.password && !isDirty?.password }
           placeholder={'Password'}
           value={password}
           type={'password'}
