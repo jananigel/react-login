@@ -2,11 +2,12 @@ import { useCallback } from "react";
 import TextButton from "../../../widgets/text-button/text-button.widget";
 import TextInput from "../../../widgets/text-input/text-input.widget";
 import { useForm } from 'react-hook-form';
+import { PasswordStrengthChecker } from "../../password-strength-checker/password-strength-checker.component";
 
 
 const SignUpForm = ({ signInClick, submitClick, account, password, confirmPassword, onSignUpAccountChanged, onSignUpPasswordChanged, onSignUpConfirmPasswordChanged }) => {
 
-  const { register, handleSubmit, watch, formState: { errors }, trigger, setValue, formState } = useForm({mode: 'all'});
+  const { register, handleSubmit, watch, formState: { errors }, trigger, setValue, getValues, formState } = useForm({mode: 'all'});
   const { isDirty, touchedFields } = formState;
 
   const onSubmitClick = useCallback(() => {
@@ -52,14 +53,14 @@ const SignUpForm = ({ signInClick, submitClick, account, password, confirmPasswo
                 value: 6,
                 message: 'Password must have at least 6 characters',
               },
-              maxLength: {
-                value: 12,
-                message: 'Password cannot over 12 characters'
-              },
-              pattern: {
-                value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+;])[0-9a-zA-Z!@#$%^&*()_+;]{6,12}$/,
-                message: 'Least one special character, one uppercase and lowercase letter and one number',
-              }
+              // maxLength: {
+              //   value: 12,
+              //   message: 'Password cannot over 12 characters'
+              // },
+              // pattern: {
+              //   value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+;])[0-9a-zA-Z!@#$%^&*()_+;]{6,12}$/,
+              //   message: 'Least one special character, one uppercase and lowercase letter and one number',
+              // }
             })}
           }
           onChange={(e) => {
@@ -94,6 +95,7 @@ const SignUpForm = ({ signInClick, submitClick, account, password, confirmPasswo
             trigger('confirmPassword');
           }}>
         </TextInput>
+        { (!errors?.password && touchedFields?.password) && <PasswordStrengthChecker password={getValues('password')}></PasswordStrengthChecker> }
         <TextButton text={'Submit'}></TextButton>
         <TextButton type={'secondary'} text={'Sign In'} btnClick={() => onSignInClick()}></TextButton>
       </form>
