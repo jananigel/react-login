@@ -1,14 +1,16 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import TextButton from "../../../widgets/text-button/text-button.widget";
 import TextInput from "../../../widgets/text-input/text-input.widget";
 import { useForm } from 'react-hook-form';
 import { PasswordStrengthChecker } from "../../password-strength-checker/password-strength-checker.component";
-
+import styles from './sign-up-form.module.scss';
+import { PasswordGeneratorModal } from "../../modals/passowrd-generator-modal/password-generator-modal.component";
 
 const SignUpForm = ({ signInClick, submitClick, account, password, confirmPassword, onSignUpAccountChanged, onSignUpPasswordChanged, onSignUpConfirmPasswordChanged }) => {
 
   const { register, handleSubmit, watch, formState: { errors }, trigger, setValue, getValues, formState } = useForm({mode: 'all'});
   const { isDirty, touchedFields } = formState;
+  const [ isShowPasswordGenerator, setIsShowPasswordGenerator ] = useState(false);
 
   const onSubmitClick = useCallback(() => {
     // submitClick();
@@ -21,6 +23,20 @@ const SignUpForm = ({ signInClick, submitClick, account, password, confirmPasswo
   const onSignInClick = useCallback(() => {
     signInClick();
   }, [signInClick]);
+
+  const onConfirmPasswordGenerator = useCallback((res) => {
+    onSignUpPasswordChanged(res);
+    onSignUpConfirmPasswordChanged(res);
+    setValue('password', res);
+    trigger('password');
+    setValue('confirmPassword', res);
+    trigger('confirmPassword');
+    setIsShowPasswordGenerator(false);
+  }, []);
+
+  const onClosePasswordGenerator = () => {
+    setIsShowPasswordGenerator(false);
+  };
 
   return (
     <>
@@ -96,8 +112,16 @@ const SignUpForm = ({ signInClick, submitClick, account, password, confirmPasswo
           }}>
         </TextInput>
         { (!errors?.password && touchedFields?.password) && <PasswordStrengthChecker password={getValues('password')}></PasswordStrengthChecker> }
-        <TextButton text={'Submit'}></TextButton>
-        <TextButton type={'secondary'} text={'Sign In'} btnClick={() => onSignInClick()}></TextButton>
+        <div className={styles.footer}>
+          <div className={styles['left-area']}>
+            <TextButton text={'Submit'}></TextButton>
+            <TextButton type={'secondary'} text={'Sign In'} btnClick={() => onSignInClick()}></TextButton>
+          </div>
+          <div className={styles['right-area']}>
+            <span onClick={() => setIsShowPasswordGenerator(true)}>Generator</span>
+            { isShowPasswordGenerator && <PasswordGeneratorModal isShow={isShowPasswordGenerator} id={Date.now()} onConfirm={onConfirmPasswordGenerator} onClose={() => onClosePasswordGenerator()}/> }
+          </div>
+        </div>
       </form>
     </>
   )
