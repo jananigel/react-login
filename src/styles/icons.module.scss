@@ -1,0 +1,16 @@
+@mixin icon($url, $width, $height) {
+  display: inline-block;
+  background: url($url) no-repeat center;
+  background-size: cover;
+  width: $width;
+  height: $height;
+  cursor: pointer;
+}
+
+.icon-gear {
+  @include icon('../assets/icons/gear.svg', 14px, 14px);
+}
+
+.icon-copy {
+  @include icon('../assets/icons/copy.svg', 14px, 14px);
+}
