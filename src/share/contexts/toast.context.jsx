@@ -6,6 +6,7 @@ const ToastContext = createContext();
 
 export const ToastProvider = ({ children }) => {
   const [toast, setToast] = useState(null);
+  const [timer, setTimer] = useState(undefined);
   const containerStyle = {
     position: 'absolute',
     bottom: 0,
@@ -22,13 +23,20 @@ export const ToastProvider = ({ children }) => {
 
   const showToast = (message) => {
     setToast({ message });
-    setTimeout(() => {
+    setTimer(setTimeout(() => {
       setToast(null);
-    }, 3000);
+      resetTimer();
+    }, 3000));
   };
 
   const onCloseToast = () => {
     setToast(null);
+    resetTimer();
+  }
+
+  const resetTimer = () => {
+    clearTimeout(timer);
+    setTimer(undefined);
   }
 
   return (
