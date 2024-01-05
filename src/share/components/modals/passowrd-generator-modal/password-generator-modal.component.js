@@ -4,12 +4,14 @@ import styles from './password-generator.module.scss';
 import { useEffect, useRef, useState } from 'react';
 import TextInput from '../../../widgets/text-input/text-input.widget';
 import { PasswordGenerator } from '../../../../core/utils/password-generator';
+import { useToastContext } from '../../../contexts/toast.context';
 
 export const PasswordGeneratorModal = ({ onClose, id, onConfirm, isShow }) => {
 
   const modalRef = useRef(null);
   const [password, setPassword] = useState(PasswordGenerator());
   const [container] = useState(() => document.createElement('div'));
+  const showToast = useToastContext();
   container.id = id;
 
 
@@ -30,6 +32,7 @@ export const PasswordGeneratorModal = ({ onClose, id, onConfirm, isShow }) => {
 
   const onCopyClick = () => {
     navigator.clipboard.writeText(password);
+    showToast(`Copied: ${password}`);
   }
 
   useEffect(() => {
