@@ -1,0 +1,33 @@
+.toast {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  grid-gap: 20px;
+  min-width: 300px;
+  padding: 20px 16px;
+  background-color: var(--primary-color);
+  color: var(--primary-btn-font-color);
+  border-radius: var(--primary-border-radius);
+  transition: all .2s linear;
+  animation: fadeIn .3s linear forwards;
+  opacity: 0;
+}
+
+.close {
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  0% {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  70% {
+    transform: translateY(-20px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
