@@ -28,6 +28,10 @@ export const PasswordGeneratorModal = ({ onClose, id, onConfirm, isShow }) => {
     onConfirm(password);
   }
 
+  const onCopyClick = () => {
+    navigator.clipboard.writeText(password);
+  }
+
   useEffect(() => {
     // portals.appendChild(container);
 
@@ -55,7 +59,7 @@ export const PasswordGeneratorModal = ({ onClose, id, onConfirm, isShow }) => {
               </div>
               <div className={styles['modal-actions']}>
                 <span className={'icon-gear'}></span>
-                <span className={'icon-copy'}></span>
+                <span className={'icon-copy'} onClick={onCopyClick}></span>
               </div>
             </div>
             <div className={styles.content}>
