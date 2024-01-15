@@ -5,8 +5,7 @@ import { createPortal } from "react-dom";
 const ToastContext = createContext();
 
 export const ToastProvider = ({ children }) => {
-  const [toast, setToast] = useState(null);
-  const [timer, setTimer] = useState(undefined);
+  const [toasts, setToasts] = useState([]);
   const containerStyle = {
     position: 'absolute',
     bottom: 0,
@@ -22,29 +21,29 @@ export const ToastProvider = ({ children }) => {
   }
 
   const showToast = (message) => {
-    setToast({ message });
-    setTimer(setTimeout(() => {
-      setToast(null);
-      resetTimer();
-    }, 3000));
+    setToasts([...toasts, {message}]);
   };
 
-  const onCloseToast = () => {
-    setToast(null);
-    resetTimer();
+  const onCloseToast = (index) => {
+    const updatedToasts = [...toasts];
+    updatedToasts.splice(index, 1);
+    setToasts(updatedToasts);
   }
-
-  const resetTimer = () => {
-    clearTimeout(timer);
-    setTimer(undefined);
-  }
-
   return (
     <ToastContext.Provider value={showToast}>
       {children}
-      {toast && createPortal(
+      {!!toasts.length && createPortal(
         <div className={`container`} style={containerStyle}>
-          <Toast message={toast.message} onCloseClick={onCloseToast}/>
+          {/* <Toast message={toast.message} onCloseClick={onCloseToast}/> */}
+          {
+            toasts.map((toast, index) => <Toast
+              message={`${index}. ${toast.message}`}
+              key={index + 1}
+              timeout={3}
+              index={index}
+              onCloseClick={() => onCloseToast(index)}/>
+            )
+          }
         </div>
         , document.body
       )}
