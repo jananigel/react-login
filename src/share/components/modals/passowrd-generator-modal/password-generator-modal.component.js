@@ -1,7 +1,7 @@
 import { createPortal } from 'react-dom';
 import TextButton from '../../../widgets/text-button/text-button.widget';
 import styles from './password-generator.module.scss';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import TextInput from '../../../widgets/text-input/text-input.widget';
 import { PasswordGenerator } from '../../../../core/utils/password-generator';
 import { useToastContext } from '../../../contexts/toast.context';
@@ -30,10 +30,10 @@ export const PasswordGeneratorModal = ({ onClose, id, onConfirm, isShow }) => {
     onConfirm(password);
   }
 
-  const onCopyClick = () => {
+  const onCopyClick = useCallback(() => {
     navigator.clipboard.writeText(password);
     showToast(`Copied: ${password}`);
-  }
+  }, [showToast]);
 
   useEffect(() => {
     // portals.appendChild(container);

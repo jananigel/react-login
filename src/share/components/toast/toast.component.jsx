@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styles from './toast.module.scss';
 
-export const Toast = ({message, onCloseClick, timeout, index, type = 'normal'}) => {
+const Toast = React.memo(({message, onCloseClick, timeout, index, type = 'normal'}) => {
 
   const [timer, setTimer] = useState(timeout);
 
@@ -35,7 +35,7 @@ export const Toast = ({message, onCloseClick, timeout, index, type = 'normal'}) 
     animationFrameId = requestAnimationFrame(animate);
 
     return () => cancelAnimationFrame(animationFrameId);
-  }, [onCloseClick, timeout, index, message]);
+  }, [index]);
 
   const closeClick = (index) => {
     onCloseClick(index);
@@ -52,4 +52,6 @@ export const Toast = ({message, onCloseClick, timeout, index, type = 'normal'}) 
       </div>
     </>
   )
-}
+});
+
+export default Toast;
